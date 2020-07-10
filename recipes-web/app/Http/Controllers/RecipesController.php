@@ -14,7 +14,7 @@ class RecipesController extends Controller
      */
     public function index()
     {
-        $recipes = Recipe::all();
+        $recipes = Recipe::orderBy('created_at','DESC')->paginate(5);
 
         return response()->json($recipes);
     }
@@ -30,14 +30,19 @@ class RecipesController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Add a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function add(Request $request)
     {
-        //
+        $recipe = Recipe::create($request->all());
+        if($recipe){
+            return response()->json(true);
+        }else {
+            return response()->json(false);
+        }
     }
 
     /**

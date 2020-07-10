@@ -17,3 +17,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/recipesList','RecipesController@index')->name('allRecipes');
+Route::post('/addRecipe','RecipesController@add')->name('addRecipe');
